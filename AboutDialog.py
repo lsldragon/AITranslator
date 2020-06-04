@@ -10,8 +10,10 @@ class AboutDialog():
         hbox = QHBoxLayout()
 
         message = QLabel()
+        # https://github.com/lsldragon/AITranslator
+
         message.setText(
-            "<html><a href=\"https: // www.baidu.com\"> wangye</a></html>")
+            "<html><a href=\"https://github.com/lsldragon/AITranslator\">https://github.com/lsldragon/AITranslator</a></html>")
 
         self.dialog = QDialog()
         self.dialog.setMinimumSize(QtCore.QSize(300, 200))
