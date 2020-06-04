@@ -13,11 +13,15 @@ Windows: 双击exe, (360安全卫士会报病毒,建议卸载360 ^OO^ 软件是�
 Linux: 添加可执行权限 (chmod + x)后, ./AITranslator  
 Mac & 其他: python3 App.py  
 
+# 贡献
+<img src="images/we.jpg" width="40%">    
+<img src="images/ali.jpg" width="40%">    
+
 # 下载地址
 可执行文件:  
 https://github.com/lsldragon/AITranslator/releases  
 Version: 1.0  
-Date: 2020.06.04
+Date: 2020.06.04  
 
 # BUGs Feedback & Contact Me
 Email: lsldragon@outlook.com
