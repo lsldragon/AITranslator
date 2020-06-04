@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>images/about.ico</file>
+    <file>images/icon.ico</file>
+    <file>images/youdao.ico</file>
+    <file>images/bing.ico</file>
+    <file>images/google.ico</file>
+    <file>images/update.ico</file>
+    <file>images/AI.ico</file>
+  </qresource>
+</RCC>
