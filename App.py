@@ -6,12 +6,10 @@ import requests
 from urllib import parse
 from PyQt5.QtCore import *
 from GetSource import *
-import time
-import threading
 from googletrans import Translator
 from AboutDialog import *
-
 from UpdateDialog import *
+
 import qdarkstyle
 
 GTransData = ""
@@ -25,6 +23,7 @@ class APP(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.center()
         self.update_label()
+
         self.AI_button.clicked.connect(self.on_ai_translate)
         self.bingButton.clicked.connect(self.on_bing)
         self.type_ComboBox.currentIndexChanged.connect(
@@ -34,10 +33,12 @@ class APP(QMainWindow, Ui_MainWindow):
         self.about_button.clicked.connect(self.show_about_dialog)
 
     def show_about_dialog(self):
-        about_dialog = AboutDialog()
+        AboutDialog()
 
     def check_update(self):
-        dialog = UpdateDialog()
+
+        self.t = CheckUpdate()
+        self.t.start()
 
     def on_google_translate(self):
 
@@ -180,7 +181,6 @@ class APP(QMainWindow, Ui_MainWindow):
         self.on_ai_translate()
 
     def get_word(self):
-
         _str = self.search_edit.toPlainText()
         return _str
 
@@ -284,6 +284,7 @@ class GTranslator(QThread):
 
     def __init__(self, dest, content):
         super().__init__()
+
         self.content = content
         self.dest = dest
 
@@ -305,10 +306,38 @@ class GTranslator(QThread):
         self.trigger.emit()
 
 
+class CheckUpdate(QThread):
+
+    VERSION = "1.0"
+    trigger = pyqtSignal()
+
+    def __init__(self):
+        super().__init__()
+
+    def run(self):
+
+        try:
+            url = "http://106.12.179.253:9999/api/checkUpdate"
+            code = GetSource.get_source_code(url)
+            content = json.loads(code)
+            version = content["version"]
+
+            if version != "1.0":
+                mes = content["message"]
+                update_dialog = UpdateDialog(mes)
+            else:
+                pass
+            self.trigger.emit()
+        except:
+            pass
+
+
 if __name__ == "__main__":
 
     app = QApplication(sys.argv)
     app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     myWin = APP()
     myWin.show()
+
+    myWin.check_update()
     sys.exit(app.exec_())
