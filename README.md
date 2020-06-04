@@ -14,8 +14,8 @@ Linux: 添加可执行权限 (chmod + x)后, ./AITranslator
 Mac & 其他: python3 App.py  
 
 # 贡献
-<img src="images/we.jpg" width="40%">    
-<img src="images/ali.jpg" width="40%">    
+<img src="images/we.jpg" width="60%">    
+<img src="images/ali.jpg" width="60%">    
 
 # 下载地址
 可执行文件:  
