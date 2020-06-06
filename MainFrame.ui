@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1249</width>
-    <height>737</height>
+    <width>1191</width>
+    <height>736</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -99,10 +99,40 @@
                <x>0</x>
                <y>0</y>
                <width>155</width>
-               <height>648</height>
+               <height>647</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <widget class="QComboBox" name="theme_comboBox">
+                <property name="font">
+                 <font>
+                  <family>微软雅黑</family>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>酷黑</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>炫白</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>系统</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>自定义</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
               <item>
                <widget class="QPushButton" name="AI_button">
                 <property name="sizePolicy">
@@ -294,11 +324,6 @@
               <item>
                <property name="text">
                 <string>德语</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>有道查词</string>
                </property>
               </item>
              </widget>

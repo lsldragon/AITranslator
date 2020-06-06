@@ -9,6 +9,7 @@ from GetSource import *
 from googletrans import Translator
 from AboutDialog import *
 from UpdateDialog import *
+from Theme import *
 
 import qdarkstyle
 
@@ -22,12 +23,13 @@ class APP(QMainWindow, Ui_MainWindow):
         super(APP, self).__init__(parent)
         self.setupUi(self)
         self.center()
+        Theme.dark_theme(self)
         self.update_label()
-
         self.AI_button.clicked.connect(self.on_ai_translate)
         self.bingButton.clicked.connect(self.on_bing)
         self.type_ComboBox.currentIndexChanged.connect(
             self.on_comboBox_changed)
+        self.theme_comboBox.currentIndexChanged.connect(self.on_theme_chaneged)
         self.youDaoButton.clicked.connect(self.on_yddict)
         self.google_button.clicked.connect(self.on_google_translate)
         self.about_button.clicked.connect(self.show_about_dialog)
@@ -40,6 +42,18 @@ class APP(QMainWindow, Ui_MainWindow):
         self.t = CheckUpdate()
         self.t.start()
 
+    def on_theme_chaneged(self):
+
+        index = self.theme_comboBox.currentIndex()
+        if index == 0:
+            Theme.dark_theme(self)
+        elif index == 1:
+            Theme.light_theme(self)
+        elif index == 2:
+            Theme.system_theme(self)
+        elif index == 3:
+            Theme.custum_theme(self)
+
     def on_google_translate(self):
 
         self.result_edit.setPlainText("")
@@ -47,7 +61,7 @@ class APP(QMainWindow, Ui_MainWindow):
         text = self.get_word()
         if text == "":
             self.result_edit.insertHtml(
-                "<html><font color=yellow>请输入关键词！！！</font></html>")
+                "<html><font color=fuchsia>请输入关键词！！！</font></html>")
             return
 
         self.t = GTranslator(dest, text)
@@ -80,7 +94,7 @@ class APP(QMainWindow, Ui_MainWindow):
 
         if query_word == "":
             self.result_edit.insertHtml(
-                "<html><font color=yellow>请输入关键词！！！</font></html>")
+                "<html><font color=fuchsia>请输入关键词！！！</font></html>")
             return
         try:
             _url = url + query_word
@@ -97,7 +111,7 @@ class APP(QMainWindow, Ui_MainWindow):
                 "<html><font color=red>" + word + "</font><br></html>")
             for p in pronounce:
                 self.result_edit.insertHtml(
-                    "<html><font color=yellow>" + p + "<font><br><br></html>")
+                    "<html><font color=fuchsia>" + p + "<font><br><br></html>")
 
             self.result_edit.insertHtml(
                 "<html><font color=red>" + "释义" + "</font><br></html>")
@@ -138,7 +152,7 @@ class APP(QMainWindow, Ui_MainWindow):
 
         if query_word == "":
             self.result_edit.insertHtml(
-                "<html><font color=yellow>请输入关键词！！！</font></html>")
+                "<html><font color=fuchsia>请输入关键词！！！</font></html>")
             return
         try:
             _url = url + query_word
@@ -156,7 +170,7 @@ class APP(QMainWindow, Ui_MainWindow):
 
             for p in pronounce:
                 self.result_edit.insertHtml(
-                    "<html><font color=yellow>" + p + "  " + "</font></html>")
+                    "<html><font color=fuchsia>" + p + "  " + "</font></html>")
 
             self.result_edit.insertHtml("<br>")
             for m in means:
@@ -233,12 +247,12 @@ class APP(QMainWindow, Ui_MainWindow):
         elif index == 9:
             dest = "de"
         else:
-            self.on_yddict()
+            pass
 
         text = self.get_word()
         if text == "":
             self.result_edit.insertHtml(
-                "<html><font color=yellow>请输入关键词！！！</font></html>")
+                "<html><font color=fuchsia>请输入关键词！！！</font></html>")
             return
 
         self.t = YouDaoTans(dest, text)
@@ -308,7 +322,6 @@ class GTranslator(QThread):
 
 class CheckUpdate(QThread):
 
-    VERSION = "1.0"
     trigger = pyqtSignal()
 
     def __init__(self):
@@ -322,7 +335,7 @@ class CheckUpdate(QThread):
             content = json.loads(code)
             version = content["version"]
 
-            if version != "1.0":
+            if version != "1.5":
                 mes = content["message"]
                 update_dialog = UpdateDialog(mes)
             else:
@@ -335,7 +348,7 @@ class CheckUpdate(QThread):
 if __name__ == "__main__":
 
     app = QApplication(sys.argv)
-    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+    # app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     myWin = APP()
     myWin.show()
 

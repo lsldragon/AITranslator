@@ -31,7 +31,6 @@ class AboutDialog():
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         font.setPointSize(10)
-
         self.okBtn = QPushButton("确定")
 
         message.setFont(font)
