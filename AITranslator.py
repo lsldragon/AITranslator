@@ -10,6 +10,7 @@ from googletrans import Translator
 from AboutDialog import *
 from UpdateDialog import *
 from Theme import *
+import re
 
 import qdarkstyle
 
@@ -29,6 +30,7 @@ class APP(QMainWindow, Ui_MainWindow):
         self.bingButton.clicked.connect(self.on_bing)
         self.type_ComboBox.currentIndexChanged.connect(
             self.on_comboBox_changed)
+        self.type_ComboBox.setToolTip("默认 AI 翻译")
         self.theme_comboBox.currentIndexChanged.connect(self.on_theme_chaneged)
         self.youDaoButton.clicked.connect(self.on_yddict)
         self.google_button.clicked.connect(self.on_google_translate)
@@ -57,7 +59,32 @@ class APP(QMainWindow, Ui_MainWindow):
     def on_google_translate(self):
 
         self.result_edit.setPlainText("")
-        dest = "zh-CN"
+
+        index = self.get_combox_index()
+        dest = "zh-cn"
+        if index == 0:
+            dest = "zh-cn"
+        elif index == 1:
+            dest = "en"
+        elif index == 2:
+            dest = "zh-cn"
+        elif index == 3:
+            dest = "ja"
+        elif index == 4:
+            dest = "ko"
+        elif index == 5:
+            dest = "fr"
+        elif index == 6:
+            dest = "es"
+        elif index == 7:
+            dest = "th"
+        elif index == 8:
+            dest = "ru"
+        elif index == 9:
+            dest = "de"
+        else:
+            pass
+
         text = self.get_word()
         if text == "":
             self.result_edit.insertHtml(
@@ -97,6 +124,7 @@ class APP(QMainWindow, Ui_MainWindow):
                 "<html><font color=fuchsia>请输入关键词！！！</font></html>")
             return
         try:
+            query_word = query_word.strip()
             _url = url + query_word
             json_str = GetSource.get_source_code(_url)
             res_list = json.loads(json_str)
@@ -107,6 +135,8 @@ class APP(QMainWindow, Ui_MainWindow):
             exampleE = res_list['exampleEList']
             exampleC = res_list['exampleCList']
 
+            self.result_edit.insertHtml(
+                "<html><font>--必应词典--</font><br></html>")
             self.result_edit.insertHtml(
                 "<html><font color=red>" + word + "</font><br></html>")
             for p in pronounce:
@@ -142,7 +172,7 @@ class APP(QMainWindow, Ui_MainWindow):
                     "<html><font>" + ec + "<font><br></html>")
         except:
             self.result_edit.insertHtml(
-                "<html><font color=red> 只支持单词查询！</font></html>")
+                "<html><font color=red> 只支持单词查询！</font><br></html>")
 
     def on_yddict(self):
 
@@ -155,6 +185,7 @@ class APP(QMainWindow, Ui_MainWindow):
                 "<html><font color=fuchsia>请输入关键词！！！</font></html>")
             return
         try:
+            query_word = query_word.strip()
             _url = url + query_word
             json_str = GetSource.get_source_code(_url)
             res_list = json.loads(json_str)
@@ -165,6 +196,8 @@ class APP(QMainWindow, Ui_MainWindow):
             example1 = res_list['example1']
             example2 = res_list['example2']
 
+            self.result_edit.insertHtml(
+                "<html><font>--有道词典--</font><br></html>")
             self.result_edit.insertHtml(
                 "<html><font color=red>" + word + "</font><br></html>")
 
@@ -250,6 +283,7 @@ class APP(QMainWindow, Ui_MainWindow):
             pass
 
         text = self.get_word()
+        text = re.sub(r"\n|\s+", " ", text)
         if text == "":
             self.result_edit.insertHtml(
                 "<html><font color=fuchsia>请输入关键词！！！</font></html>")
@@ -335,7 +369,7 @@ class CheckUpdate(QThread):
             content = json.loads(code)
             version = content["version"]
 
-            if version != "1.5":
+            if version != "1.0":
                 mes = content["message"]
                 update_dialog = UpdateDialog(mes)
             else:
@@ -348,7 +382,6 @@ class CheckUpdate(QThread):
 if __name__ == "__main__":
 
     app = QApplication(sys.argv)
-    # app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     myWin = APP()
     myWin.show()
 
