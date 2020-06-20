@@ -25,12 +25,17 @@ https://github.com/lsldragon/AITranslator/releases
 Version: 1.0  
 Date: 2020.06.04  
 
--------------------------------------------------
 Version: 1.5  
 更新:   
 1. 增加默认的3套主题，并支持自定义主题( .qss 文件,且和软件在同一目录才能加载)  
 2. 其他优化和改进  
 
+Version 1.17  
+更新:  
+1. Google 翻译增强(除文言文外,其他语言皆可翻译)
+
+
+-------------------------------------------------
 
 # BUGs Feedback & Contact Me
 Email: lsldragon@outlook.com
