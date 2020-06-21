@@ -118,6 +118,7 @@ class APP(QMainWindow, Ui_MainWindow):
         self.result_edit.clear()
         query_word = self.get_word()
         url = "http://106.12.179.253:8089/lsl/api/bingword?words="
+        # url = "http://localhost:8089/lsl/api/bingword?words="
 
         if query_word == "":
             self.result_edit.insertHtml(
@@ -134,6 +135,8 @@ class APP(QMainWindow, Ui_MainWindow):
             usage = res_list['usageList']
             exampleE = res_list['exampleEList']
             exampleC = res_list['exampleCList']
+            tongyici = res_list['tongyiCiList']
+            fanyici = res_list['fanyiciList']
 
             self.result_edit.insertHtml(
                 "<html><font>--必应词典--</font><br></html>")
@@ -155,6 +158,20 @@ class APP(QMainWindow, Ui_MainWindow):
             for u in usage:
                 self.result_edit.insertHtml(
                     "<html><font>" + u + "<font><br></html>")
+
+            self.result_edit.insertPlainText("\r\n")
+            self.result_edit.insertHtml(
+                "<html><font color=red>" + "同义词" + "</font><br></html>")
+            for tyc in tongyici:
+                self.result_edit.insertHtml(
+                    "<html><font>" + tyc + "<font><br></html>")
+
+            self.result_edit.insertPlainText("\r\n")
+            self.result_edit.insertHtml(
+                "<html><font color=red>" + "反义词" + "</font><br></html>")
+            for fyc in fanyici:
+                self.result_edit.insertHtml(
+                    "<html><font>" + fyc + "<font><br></html>")
 
             self.result_edit.insertPlainText("\r\n")
             self.result_edit.insertHtml(
@@ -195,6 +212,8 @@ class APP(QMainWindow, Ui_MainWindow):
             means = res_list['means']
             example1 = res_list['example1']
             example2 = res_list['example2']
+            tongyici = res_list['tongyici']
+            cx = res_list['cixing']
 
             self.result_edit.insertHtml(
                 "<html><font>--有道词典--</font><br></html>")
@@ -209,6 +228,11 @@ class APP(QMainWindow, Ui_MainWindow):
             for m in means:
                 self.result_edit.insertPlainText(m + "\r\n")
 
+            self.result_edit.insertHtml(
+                '<html><font color=red>' + "词形" + '</font><br></html>')
+            for cx in cx:
+                self.result_edit.insertHtml(cx + "\r\n")
+
             self.result_edit.insertPlainText("\r\n")
             self.result_edit.insertHtml(
                 "<html><font color=red>" + "柯林斯释义" + "</font><br></html>")
@@ -216,7 +240,12 @@ class APP(QMainWindow, Ui_MainWindow):
                 self.result_edit.insertPlainText(e1 + "\r\n")
 
             self.result_edit.insertHtml(
-                "<html><font color=red>" + "例句" + "</font><br></html>")
+                '<html><font color=red>' + "同义词" + '</font><br></html>')
+            for tong in tongyici:
+                self.result_edit.insertPlainText(tong + "\r\n")
+
+            self.result_edit.insertHtml(
+                "<html><font color=red>" + "双语例句" + "</font><br></html>")
             for e2 in example2:
                 self.result_edit.insertPlainText(e2 + "\r\n")
             QApplication.processEvents()

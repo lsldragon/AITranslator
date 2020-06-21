@@ -210,7 +210,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "AITranslator  v1.17"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "AITranslator  v1.21"))
         self.label_2.setText(_translate("MainWindow", "源语言(自动检测)"))
         self.theme_comboBox.setItemText(0, _translate("MainWindow", "酷黑"))
         self.theme_comboBox.setItemText(1, _translate("MainWindow", "炫白"))
