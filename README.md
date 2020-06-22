@@ -1,8 +1,9 @@
 # AITranslator
 跨平台翻译软件,支持:  
+针对词汇深度优化  
 AI 翻译 -> 汉语，英语，文言文，日语，韩语，法语，西班牙语，泰语，俄语，德语互译。可翻译单词和句子。  
 Google 翻译 -> 英语。可翻译单词和句子。  
-有道查词 和 Bing词典 -> 仅支持单词查询,附有单词的详解。
+有道查词 和 Bing词典 -> 仅支持单词查询,附有单词的详解。  
 
 # 开发框架
 前端: python + pyqt5   
@@ -11,7 +12,7 @@ Google 翻译 -> 英语。可翻译单词和句子。
 # 运行
 Windows: 双击exe, (360安全卫士会报病毒,建议卸载360 ^OO^ 软件是纯开源的，duck不必惊慌)  
 Linux: 添加可执行权限 (chmod + x)后, ./AITranslator  
-Mac & 其他: python3 App.py  
+Mac & 其他: python3 AITranslator.py  
 
 # 贡献
 <img src="images/we.jpg" width="60%">    
