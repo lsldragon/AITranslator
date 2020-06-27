@@ -187,6 +187,7 @@ class APP(QMainWindow, Ui_MainWindow):
             for ec in exampleC:
                 self.result_edit.insertHtml(
                     "<html><font>" + ec + "<font><br></html>")
+            QApplication.processEvents()
         except:
             self.result_edit.insertHtml(
                 "<html><font color=red> 只支持单词查询！</font><br></html>")
