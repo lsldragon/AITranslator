@@ -35,6 +35,8 @@ class APP(QMainWindow, Ui_MainWindow):
         self.youDaoButton.clicked.connect(self.on_yddict)
         self.google_button.clicked.connect(self.on_google_translate)
         self.about_button.clicked.connect(self.show_about_dialog)
+        self.clear_button.clicked.connect(self.clear_sourceL)
+        self.check_update()
 
     def show_about_dialog(self):
         AboutDialog()
@@ -43,6 +45,9 @@ class APP(QMainWindow, Ui_MainWindow):
 
         self.t = CheckUpdate()
         self.t.start()
+
+    def clear_sourceL(self):
+        self.search_edit.setPlainText("")
 
     def on_theme_chaneged(self):
 
@@ -399,7 +404,7 @@ class CheckUpdate(QThread):
             content = json.loads(code)
             version = content["version"]
 
-            if version != "1.0":
+            if version != "1.2":
                 mes = content["message"]
                 update_dialog = UpdateDialog(mes)
             else:
@@ -415,5 +420,4 @@ if __name__ == "__main__":
     myWin = APP()
     myWin.show()
 
-    myWin.check_update()
     sys.exit(app.exec_())

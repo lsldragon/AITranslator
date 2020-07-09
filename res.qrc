@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>images/clear.ico</file>
     <file>images/about.ico</file>
     <file>images/icon.ico</file>
     <file>images/youdao.ico</file>
