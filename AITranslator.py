@@ -404,7 +404,7 @@ class CheckUpdate(QThread):
             content = json.loads(code)
             version = content["version"]
 
-            if version != "1.2":
+            if version != "1.23":
                 mes = content["message"]
                 update_dialog = UpdateDialog(mes)
             else:
