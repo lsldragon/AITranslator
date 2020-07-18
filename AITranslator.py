@@ -21,6 +21,7 @@ AITransData = ""
 class APP(QMainWindow, Ui_MainWindow):
 
     def __init__(self, parent=None):
+
         super(APP, self).__init__(parent)
         self.setupUi(self)
         self.center()
@@ -36,7 +37,19 @@ class APP(QMainWindow, Ui_MainWindow):
         self.google_button.clicked.connect(self.on_google_translate)
         self.about_button.clicked.connect(self.show_about_dialog)
         self.clear_button.clicked.connect(self.clear_sourceL)
+
+        self.clipboard = QApplication.clipboard()
+        self.clipboard.dataChanged.connect(self.get_text_from_clipboard)
+
         self.check_update()
+        self.get_text_from_clipboard()
+
+    def get_text_from_clipboard(self):
+
+        cb = self.clipboard
+        text = cb.text()
+        self.search_edit.setPlainText(text)
+        self.on_ai_translate()
 
     def show_about_dialog(self):
         AboutDialog()
@@ -93,7 +106,7 @@ class APP(QMainWindow, Ui_MainWindow):
         text = self.get_word()
         if text == "":
             self.result_edit.insertHtml(
-                "<html><font color=fuchsia>请输入关键词！！！</font></html>")
+                "<html><font color=fuchsia>请输入关键词！！！</font><br></html>")
             return
 
         self.t = GTranslator(dest, text)
@@ -321,7 +334,7 @@ class APP(QMainWindow, Ui_MainWindow):
         text = re.sub(r"\n|\s+", " ", text)
         if text == "":
             self.result_edit.insertHtml(
-                "<html><font color=fuchsia>请输入关键词！！！</font></html>")
+                "<html><font color=fuchsia>请输入关键词！！！</font><br></html>")
             return
 
         self.t = YouDaoTans(dest, text)
