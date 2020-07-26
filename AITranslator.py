@@ -136,7 +136,6 @@ class APP(QMainWindow, Ui_MainWindow):
         self.result_edit.clear()
         query_word = self.get_word()
         url = "http://106.12.179.253:8089/lsl/api/bingword?words="
-        # url = "http://localhost:8089/lsl/api/bingword?words="
 
         if query_word == "":
             self.result_edit.insertHtml(
